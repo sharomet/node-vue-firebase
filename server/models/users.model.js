@@ -19,9 +19,6 @@ export function getUserById(id) {
     return user.save();
 }*/
 
-/*export function getUserById(id) {
-    return users.findById(id);
-}*/
 /*
 export function deleteUser(id) {
     return Users.findById(id).remove();

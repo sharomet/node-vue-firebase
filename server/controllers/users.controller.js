@@ -9,22 +9,10 @@ exports.getUserById = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-    res.send(req.body);
-
-    /*req.checkBody('first_name', 'First Name is required field!').notEmpty();
-    req.checkBody('last_name', 'Last Name is required field!').notEmpty();
-    req.checkBody('email', 'Invalid email address!').isEmail();
-
-    req.getValidationResult().then(result => {
-        if(!result.isEmpty()) {
-            result.array().forEach((error) => {
-                res.json({success:false, message: error.msg});
-            });
-        } else {
-            db.createUser(req.body).then(data => res.send(data));
-            return res.json({success: true, message: 'User successfully added'});
-        }
-    });*/
+    let data = db.createUser(req.body);
+    data.transaction((current_value) => {
+        res.send(current_value);
+    });
 };
 
 /*

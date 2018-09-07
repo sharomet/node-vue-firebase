@@ -45,7 +45,10 @@ import axios from 'axios';
 		methods: {
 			getAllUser() {
 				axios.get('http://localhost:3100/api/users/')
-					 .then(res => this.users = res.data)
+					 .then(res => {
+						 this.users = Object.values(res.data);
+						 //this.users = Object.values(res.data);
+					 })
 					 .catch(err => console.log('Error!'));
 			},
 			addUser() {
@@ -61,10 +64,7 @@ import axios from 'axios';
 						}
 				    })
 					 .then(res => {
-						 let dat = res.data;
-						 console.log(dat);
-						 console.log(this.users);
-						 this.users.push(dat);
+						 this.users.push(res.data);
 					 })
 					 .catch(err => console.log('Error!'));
 			}

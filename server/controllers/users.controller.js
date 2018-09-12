@@ -1,5 +1,8 @@
 import * as db from '../models/users.model';
 
+/**
+* Return user array
+*/
 const getUser = (dat) => {
         let user = dat.data();
         return {
@@ -10,6 +13,9 @@ const getUser = (dat) => {
         }
 };
 
+/**
+* get all users
+*/
 exports.getAllUsers = (req, res) => {
     db.getAllUsers()
       .then(snapshot => {
@@ -25,6 +31,9 @@ exports.getAllUsers = (req, res) => {
       })
 };
 
+/**
+* Get user by id
+*/
 exports.getUserById = (req, res) => {
     db.getUserById(req.params.id)
       .then(doc => {
@@ -37,6 +46,9 @@ exports.getUserById = (req, res) => {
       .catch(err => console.log('Error'));
 };
 
+/**
+* Create new user
+*/
 exports.createUser = (req, res) => {
     db.createUser(req.body)
       .then(doc => res.send(getUser(doc)))

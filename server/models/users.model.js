@@ -1,13 +1,23 @@
 import db from '../config/dataBase';
 import guid from 'guid';
 
+/**
+* Get all Users
+*/
 export function getAllUsers() {
     return db.collection('users').get();
 }
 
+/**
+* Get user by id
+*/
 export function getUserById(id) {
     return db.collection('users').doc(id).get();
 }
+
+/**
+* Create new user
+*/
 export function createUser(data) {
     let id = guid.create().value;
     let user = db.collection('users').doc(id);

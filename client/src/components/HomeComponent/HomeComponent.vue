@@ -1,9 +1,6 @@
 <template>
 	<div class="container">
-		<ul>
-			<li v-for="(user, index) of users" :key="index">{{ user.id + ' ' + user.first_name + ' ' + user.last_name }}</li>
-		</ul>
-		<div class="row">
+		<div class="row mb-4">
 			<div class="col-md-5">
 				<div class="card">
 					<div class="card-header">Add User</div>
@@ -25,6 +22,32 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="table-responsive-sm">
+			<table class="table table-striped table-hover table-sm table-bordered">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 65px">#</th>
+						<th scope="col" class="text-center">First Name</th>
+						<th scope="col" class="text-center">Last Name</th>
+						<th scope="col" class="text-center">Age</th>
+						<th scope="col" class="text-center" style="width: 105px">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(user, index) of users" :key="index">
+						<td class="align-middle">{{ user.id.slice(0, 5) + '...' }}</td>
+						<td class="text-center align-middle">{{ user.first_name }}</td>
+						<td class="text-center align-middle">{{ user.last_name }}</td>
+						<td class="text-center align-middle">{{ user.age }}</td>
+						<td class="text-center">
+							<button type="button" class="btn btn-sm btn-primary">Edit</button>
+							<button type="button" class="btn btn-sm btn-danger">Del</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </template>

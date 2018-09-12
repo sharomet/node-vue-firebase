@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<ul>
-			<li v-for="(user, index) of users" :key="index">{{ user.first_name }}</li>
+			<li v-for="(user, index) of users" :key="index">{{ user.id + ' ' + user.first_name + ' ' + user.last_name }}</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-5">
@@ -45,10 +45,7 @@ import axios from 'axios';
 		methods: {
 			getAllUser() {
 				axios.get('http://localhost:3100/api/users/')
-					 .then(res => {
-						 this.users = Object.values(res.data);
-						 //this.users = Object.values(res.data);
-					 })
+					 .then(res => this.users = res.data)
 					 .catch(err => console.log('Error!'));
 			},
 			addUser() {
@@ -64,7 +61,10 @@ import axios from 'axios';
 						}
 				    })
 					 .then(res => {
-						 this.users.push(res.data);
+						this.users.push(res.data);
+						this.firstName = '';
+						this.lastName = '';
+						this.age = '';
 					 })
 					 .catch(err => console.log('Error!'));
 			}

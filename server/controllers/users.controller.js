@@ -1,18 +1,46 @@
 import * as db from '../models/users.model';
 
+const getUser = (dat) => {
+        let user = dat.data();
+        return {
+            id: dat.id,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            age: user.age
+        }
+};
+
 exports.getAllUsers = (req, res) => {
-    db.getAllUsers().then(data => res.send(data));
+    db.getAllUsers()
+      .then(snapshot => {
+        res.send(snapshot.docs.map(doc => {
+            let data = doc.data();
+            return {
+                id: doc.id,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                age: data.age
+            }
+        }));
+      })
 };
 
 exports.getUserById = (req, res) => {
-    db.getUserById(req.params.id).then(data => res.send(data));
+    db.getUserById(req.params.id)
+      .then(doc => {
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            res.send(getUser(doc));
+        }
+      })
+      .catch(err => console.log('Error'));
 };
 
 exports.createUser = (req, res) => {
-    let data = db.createUser(req.body);
-    data.transaction((current_value) => {
-        res.send(current_value);
-    });
+    db.createUser(req.body)
+      .then(doc => res.send(getUser(doc)))
+      .catch(err => console.log('Error'));
 };
 
 /*

@@ -1,4 +1,5 @@
 /node_modules
+/dist
 /server/etc/config.json
 /server/etc/ServiceKey.json
 

@@ -42,8 +42,12 @@
 						<td class="text-center align-middle">{{ user.last_name }}</td>
 						<td class="text-center align-middle">{{ user.age }}</td>
 						<td class="text-center">
-							<button type="button" class="btn btn-sm btn-primary">Edit</button>
-							<button type="button" class="btn btn-sm btn-danger">Del</button>
+							<button type="button" class="btn btn-sm btn-primary">
+								<i class="fas fa-pen"></i>
+							</button>
+							<button type="button" class="btn btn-sm btn-danger" @click="deleteUser(user.id)">
+								<i class="far fa-trash-alt"></i>
+							</button>
 						</td>
 					</tr>
 				</tbody>
@@ -90,6 +94,16 @@ import axios from 'axios';
 						this.age = '';
 					 })
 					 .catch(err => console.log('Error!'));
+			},
+			deleteUser(id) {
+	            axios.delete('http://localhost:3100/api/users/' + id)
+	            .then(res => {
+					this.users = this.users.filter(function(item) {
+						return item.id !== id;
+					});
+					//console.log(res);
+	            })
+	            .catch(err => console.log('Error'));
 			}
 		}
 	}

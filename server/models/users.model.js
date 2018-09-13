@@ -24,6 +24,14 @@ export function createUser(data) {
     user.set(data);
     return user.get();
 };
+
+/**
+* Delete user
+*/
+export function deleteUser(id) {
+    return db.collection('users').doc(id).delete();
+}
+
 /*export function createUser(data) {
     const user = new Users ({
         first_name: data.first_name,
@@ -33,9 +41,4 @@ export function createUser(data) {
         created_at: new Date()
     });
     return user.save();
-}*/
-
-/*
-export function deleteUser(id) {
-    return Users.findById(id).remove();
 }*/

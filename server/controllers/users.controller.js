@@ -55,6 +55,13 @@ exports.createUser = (req, res) => {
       .catch(err => console.log('Error'));
 };
 
+/**
+* Delete User
+*/
+exports.deleteUser = (req, res) => {
+    db.deleteUser(req.params.id).then(data => res.send(data));
+};
+
 /*
 exports.createUser = (req, res) => {
 
@@ -72,9 +79,4 @@ exports.createUser = (req, res) => {
             return res.json({success: true, message: 'User successfully added'});
         }
     });
-};*/
-
-/*
-exports.deleteUser = (req, res) => {
-    db.deleteUser(req.params.id).then(data => res.send(data));
 };*/
